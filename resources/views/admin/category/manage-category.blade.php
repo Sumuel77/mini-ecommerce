@@ -1,0 +1,69 @@
+@extends('admin.master')
+@section('body')
+    <!-- CONTAINER -->
+    <div class="main-container container-fluid">
+
+
+        <!-- PAGE-HEADER -->
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Form Layouts</h1>
+            </div>
+            <div class="ms-auto pageheader-btn">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Form Layouts</li>
+                </ol>
+            </div>
+        </div>
+        <!-- PAGE-HEADER END -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-xl-12 mx-auto d-block">
+                    <h4 class="text-center text-success">{{ session('message') }}</h4>
+                    <table class="table table-bordered table-hover table-striped">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, totam.
+                        <thead>
+                            <tr>
+                                <th>Sl</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                            @foreach($categories as $category)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>
+                                        <img src="{{ asset($category->image) }}" style="height: 50px; width: 50px" alt="">
+                                    </td>
+                                    <td>{{ $category->status == 1 ? 'active' : 'Inactive' }}</td>
+                                    <td>
+                                        <a href="{{ route('category.edit',['id' => $category->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+
+                                        @if($category->status == 1)
+                                            <a href="{{ route('category.status', ['id' => $category->id]) }}" class="btn btn-success btn-sm">Inactive</a>
+                                        @else
+                                            <a href="{{ route('category.status', ['id' => $category->id]) }}" class="btn btn-warning btn-sm">Active</a>
+                                        @endif
+
+{{--                                        <a href="{{ route('category.delete', ['id' => $category->id]) }}" class="btn btn-danger btn-sm">Delete</a>--}}
+
+                                        <form action="{{ route('category.delete') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $category->id }}">
+                                            <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure delete this!')" >Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
