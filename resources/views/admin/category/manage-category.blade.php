@@ -22,7 +22,6 @@
                 <div class="col-md-12 col-lg-12 col-xl-12 mx-auto d-block">
                     <h4 class="text-center text-success">{{ session('message') }}</h4>
                     <table class="table table-bordered table-hover table-striped">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, totam.
                         <thead>
                             <tr>
                                 <th>Sl</th>
